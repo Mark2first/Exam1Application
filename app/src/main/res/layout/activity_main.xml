@@ -29,11 +29,36 @@
 
         <Button
             android:id="@+id/btnAC"
-            android:layout_width="401dp"
+            android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
             android:backgroundTint="#E4E3E3"
             android:text="ac"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btnSin"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:backgroundTint="#E4E3E3"
+            android:text="sin"
+            android:textColor="@color/black" />
+        <Button
+            android:id="@+id/btnCos"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:backgroundTint="#E4E3E3"
+            android:text="cos"
+            android:textColor="@color/black" />
+        <Button
+            android:id="@+id/btnTan"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:backgroundTint="#E4E3E3"
+            android:text="tan"
             android:textColor="@color/black" />
 
     </LinearLayout>

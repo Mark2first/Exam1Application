@@ -1,9 +1,13 @@
 package com.example.exam1application
 
-import Stack2.Utils2
+
+import Stack2.Utils3
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -13,7 +17,6 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         // EditText获取
         var editText:EditText = findViewById(R.id.edittext)
@@ -37,6 +40,11 @@ class MainActivity : AppCompatActivity(){
         var btnMul:Button = findViewById(R.id.btnMul)   // 乘法
         var btnDiv:Button = findViewById(R.id.btnDiv)   // 除法
         var btnAC:Button = findViewById(R.id.btnAC)     // 清零
+
+        // 三角函数
+        var btnSin:Button = findViewById(R.id.btnSin)
+        var btnCos:Button = findViewById(R.id.btnCos)
+        var btnTan:Button = findViewById(R.id.btnTan)
 
         // 等于按钮
         var equal:Button = findViewById(R.id.equal)     //等于号
@@ -89,16 +97,65 @@ class MainActivity : AppCompatActivity(){
             editText.setText(editText.text.toString() +  btnd.text.toString())
         }
 
-        // 等号
-        equal.setOnClickListener{
+        // 三角函数计算
+        btnSin.setOnClickListener {
             var str = editText.text.toString()
-            println(str)
             if(str.isEmpty()){
                 Toast.makeText(this@MainActivity,"请输入数值",Toast.LENGTH_LONG).show()
             }else{
-                var ss = Utils2.calculateString(str).toString()
-                println(ss)
-                editText.setText(ss)
+                var str1 = str.toDouble()
+                str1 = Math.sin(str1)
+                editText.setText(str1.toString())
+            }
+        }
+
+        btnCos.setOnClickListener {
+            var str = editText.text.toString()
+            if(str.isEmpty()){
+                Toast.makeText(this@MainActivity,"请输入数值",Toast.LENGTH_LONG).show()
+            }else{
+                var str1 = str.toDouble()
+                str1 = Math.cos(str1)
+                editText.setText(str1.toString())
+            }
+        }
+
+        btnTan.setOnClickListener {
+            var str = editText.text.toString()
+            if(str.isEmpty()){
+                Toast.makeText(this@MainActivity,"请输入数值",Toast.LENGTH_LONG).show()
+            }else{
+                var str1 = str.toDouble()
+                str1 = Math.tan(str1)
+                editText.setText(str1.toString())
+            }
+        }
+
+        // 等号
+        equal.setOnClickListener{
+            var str = editText.text.toString()
+//            println(str)
+            if(str.isEmpty()){
+                Toast.makeText(this@MainActivity,"请输入数值",Toast.LENGTH_LONG).show()
+            }
+//            else if(Utils3.calculateString(str)==null){
+//                Toast.makeText(this@MainActivity,"非法输入",Toast.LENGTH_LONG).show()
+//                editText.setText("")
+//            }
+            else{
+                try{
+                    var ss = Utils3.calculateString(str)
+                    if(ss.toString().equals("Infinity")){
+                        Toast.makeText(this@MainActivity,"不能以0作为除数",Toast.LENGTH_LONG).show()
+                        editText.setText("")
+                    }
+                    else{
+                        editText.setText(ss.toString())
+                    }
+                }catch (e:Exception){
+                    Toast.makeText(this@MainActivity,"非法输入",Toast.LENGTH_LONG).show()
+                }
+
             }
         }
 
@@ -108,6 +165,23 @@ class MainActivity : AppCompatActivity(){
         }
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.setting_item->{
+                intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://www.baidu.com")
+                startActivity(intent)
+            }
+            R.id.quit_item->finish()
+        }
+        return true
     }
 }
 
