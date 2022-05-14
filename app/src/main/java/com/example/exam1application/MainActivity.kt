@@ -1,7 +1,6 @@
 package com.example.exam1application
 
-
-import Stack2.Utils3
+import Stack2.Utils4
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -103,9 +102,12 @@ class MainActivity : AppCompatActivity(){
             if(str.isEmpty()){
                 Toast.makeText(this@MainActivity,"请输入数值",Toast.LENGTH_LONG).show()
             }else{
-                var str1 = str.toDouble()
-                str1 = Math.sin(str1)
-                editText.setText(str1.toString())
+                try{
+                    var str1 = Math.sin(Utils4.calculateString(str).toString().toDouble())
+                    editText.setText(str1.toString())
+                }catch (e:Exception){
+                    Toast.makeText(this@MainActivity,"非法输入",Toast.LENGTH_LONG).show()
+                }
             }
         }
 
@@ -114,9 +116,12 @@ class MainActivity : AppCompatActivity(){
             if(str.isEmpty()){
                 Toast.makeText(this@MainActivity,"请输入数值",Toast.LENGTH_LONG).show()
             }else{
-                var str1 = str.toDouble()
-                str1 = Math.cos(str1)
-                editText.setText(str1.toString())
+                try{
+                    var str1 = Math.cos(Utils4.calculateString(str).toString().toDouble())
+                    editText.setText(str1.toString())
+                }catch (e:Exception){
+                    Toast.makeText(this@MainActivity,"非法输入",Toast.LENGTH_LONG).show()
+                }
             }
         }
 
@@ -125,9 +130,12 @@ class MainActivity : AppCompatActivity(){
             if(str.isEmpty()){
                 Toast.makeText(this@MainActivity,"请输入数值",Toast.LENGTH_LONG).show()
             }else{
-                var str1 = str.toDouble()
-                str1 = Math.tan(str1)
-                editText.setText(str1.toString())
+                try{
+                    var str1 = Math.tan(Utils4.calculateString(str).toString().toDouble())
+                    editText.setText(str1.toString())
+                }catch (e:Exception){
+                    Toast.makeText(this@MainActivity,"非法输入",Toast.LENGTH_LONG).show()
+                }
             }
         }
 
@@ -144,18 +152,18 @@ class MainActivity : AppCompatActivity(){
 //            }
             else{
                 try{
-                    var ss = Utils3.calculateString(str)
+                    var ss = Utils4.calculateString(str)
                     if(ss.toString().equals("Infinity")){
                         Toast.makeText(this@MainActivity,"不能以0作为除数",Toast.LENGTH_LONG).show()
                         editText.setText("")
                     }
                     else{
-                        editText.setText(ss.toString())
+                        var strr = ss?.toFloat()
+                        editText.setText(strr.toString())
                     }
                 }catch (e:Exception){
                     Toast.makeText(this@MainActivity,"非法输入",Toast.LENGTH_LONG).show()
                 }
-
             }
         }
 
@@ -176,7 +184,7 @@ class MainActivity : AppCompatActivity(){
         when(item.itemId){
             R.id.setting_item->{
                 intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse("https://www.baidu.com")
+                intent.data = Uri.parse("https://github.com/Mark2first/Exam1Application")
                 startActivity(intent)
             }
             R.id.quit_item->finish()
